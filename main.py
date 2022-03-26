@@ -1,10 +1,7 @@
+import plotly.express as px
 import numpy as np
-from matplotlib import pyplot as plt
-plt.rcParams["figure.figsize"] = [7.00, 3.50]
-plt.rcParams["figure.autolayout"] = True
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-data = np.random.random(size=(3, 3, 3))
-z, x, y = data.nonzero()
-ax.scatter(x, y, z, c=z, alpha=1)
-plt.show()
+df = px.data.gapminder()
+fig = px.scatter_3d(df, x='year', y='continent', z='pop', size='gdpPercap', color='lifeExp',
+                    hover_data=['country'])
+fig.update_layout(scene_zaxis_type="log")
+fig.show()
